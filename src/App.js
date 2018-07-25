@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import { MapContainer } from "./components/Map";
 
 class App extends Component {
   render() {
@@ -22,7 +23,8 @@ class App extends Component {
               <li className="list-item">Bielany</li>
             </ul>
           </aside>
-          <div className="map"></div>
+          
+          <div className="map"><MapContainer google = {window.google}/></div>
         </div>
       </div>
     );

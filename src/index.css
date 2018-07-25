@@ -39,17 +39,19 @@ body {
 
 .wrapper {
   display: flex;
+  height: calc(100vh - 160px)
 }
 
 .side-list {
   flex-basis: 200px;
   background-color: #333;
+  overflow-y: scroll;
 }
 
 .map {
   flex: 1;
   background-color: rgb(182, 181, 181);
-  min-height: calc(100vh - 160px);
+  position: relative;
 }
 
 .list-item {
