@@ -1,0 +1,8 @@
+[
+  { "name": "restaurant 1", "lat": 52.23, "lng": 21.02, "id": 1 },
+  { "name": "restaurant 2", "lat": 52.21, "lng": 21.0, "id": 2 },
+  { "name": "restaurant 3", "lat": 52.2, "lng": 21.02, "id": 3 },
+  { "name": "restaurant 4", "lat": 52.24, "lng": 21.03, "id": 4 },
+  { "name": "restaurant 5", "lat": 52.2, "lng": 21.01, "id": 5 },
+  { "name": "restaurant 6", "lat": 52.22, "lng": 21.03, "id": 6 }
+]

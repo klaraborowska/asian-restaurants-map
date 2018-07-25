@@ -3,20 +3,14 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
 export class MapContainer extends Component {
   state = {
-    points: [
-      { name: "restaurant1", lat: 52.23, lng: 21.02, id: 1 },
-      { name: "restaurant2", lat: 52.21, lng: 21.0, id: 2 },
-      { name: "restaurant3", lat: 52.2, lng: 21.02, id: 3 },
-      { name: "restaurant4", lat: 52.24, lng: 21.03, id: 4 }
-    ],
     showingInfoWindow: false,
-    clickedMarker: {}
-    //selectedPlace: {}
+    clickedMarker: {},
+    selectedPlace: {}
   };
 
-  onMarkerClick = (/*props, */ marker) =>
+  onMarkerClick = (props, marker) =>
     this.setState({
-      //selectedPlace: props,
+      selectedPlace: props,
       clickedMarker: marker,
       showInfoWindow: true
     });
@@ -29,18 +23,19 @@ export class MapContainer extends Component {
         google={this.props.google}
         style={style}
         initialCenter={{
-          lat: 52.2296756,
+          lat: 52.2246756,
           lng: 21.0122287
         }}
-        zoom={12}
+        zoom={13}
         gestureHandling={"greedy"}
       >
-        {this.state.points.map(marker => (
+        {this.props.locations.map(marker => (
           <Marker
             onClick={this.onMarkerClick}
-            key={marker.id}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            name={marker.name}
+            key={marker.venue.id}
+            position={{ lat: marker.venue.location.lat, lng: marker.venue.location.lng }}
+            name={marker.venue.name}
+            address={marker.venue.location.address}
           />
         ))}
 
@@ -50,8 +45,9 @@ export class MapContainer extends Component {
           visible={this.state.showInfoWindow}
         >
           <div>
-            <h1>{this.state.clickedMarker.name}</h1>
-            <img src="" alt="rest-pic" />
+            <h1>{this.state.selectedPlace.name}</h1>
+            <p>Adres: {this.state.selectedPlace.address}</p>
+            <img src="" alt="" />
           </div>
         </InfoWindow>
       </Map>
