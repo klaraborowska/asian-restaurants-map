@@ -67,7 +67,6 @@ body {
 
 .list-item:hover {
   background-color: rgb(70, 70, 70);
-  padding-left: 60px;
 }
 
 .list-item:last-child {

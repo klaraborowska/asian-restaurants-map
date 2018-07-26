@@ -5,19 +5,29 @@ export class MapContainer extends Component {
   state = {
     showingInfoWindow: false,
     clickedMarker: {},
-    selectedPlace: {}
+    selectedPlace: {},
+    animation: 0
   };
 
-  onMarkerClick = (props, marker) =>
+  onMarkerClick = (props, marker) => {
     this.setState({
       selectedPlace: props,
       clickedMarker: marker,
-      showInfoWindow: true
+      showInfoWindow: true,
+      animation: 1
     });
+  }
+  
+  onInfoWindowClose = () => {
+    this.setState({
+      animation: 0
+    });
+  }
 
   render() {
     const style = {};
 
+    
     return (
       <Map
         google={this.props.google}
@@ -36,6 +46,7 @@ export class MapContainer extends Component {
             position={{ lat: marker.venue.location.lat, lng: marker.venue.location.lng }}
             name={marker.venue.name}
             address={marker.venue.location.address}
+            animation={marker.venue.name === this.state.clickedMarker.name ? this.state.animation : null}
           />
         ))}
 

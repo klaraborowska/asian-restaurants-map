@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 import { MapContainer } from "./components/Map";
 import ListItem from "./components/ListItem";
-
-
-
-
   
 
 class App extends Component {
@@ -16,11 +12,11 @@ class App extends Component {
   componentDidMount() {
     const key = 'D5SNMMUIS3DTXRQ5FN5G1UBU4XKRSEGVR0KXMS5KRB1YZGSY';
     const secret= 'NAJXBKSQ4VEKRWJPDEGVPW1QMASLTUEGXWYDBOVJG2ODFF5J'
-    fetch(`https://api.foursquare.com/v2/venues/explore?ll=52.2246756,21.0122287&categoryId=4e4c9077bd41f78e849722f9&client_id=${key}&client_secret=${secret}&v=20180726`)
+    fetch(`https://api.foursquare.com/v2/venues/explore?ll=52.2246756,21.0122287&categoryId=4bf58dd8d48988d137941735&client_id=${key}&client_secret=${secret}&v=20180726`)
     .then(response => response.json())
     .then(res => {
+      console.log(res)
       const result = res.response.groups[0].items;
-      console.log(result);
       this.setState({
         locations: result
       });
@@ -30,11 +26,12 @@ class App extends Component {
     })
   }
 
+
   render() {
     return (
       <div className="App">
         <header className="header">
-          <h1 className="header-title">Warsaw's Bike Rental</h1>
+          <h1 className="header-title">Warsaw's Theaters</h1>
         </header>
         <div className="wrapper">
           <aside className="side-list">
