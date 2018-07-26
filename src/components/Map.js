@@ -2,32 +2,10 @@ import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
 export class MapContainer extends Component {
-  state = {
-    showingInfoWindow: false,
-    clickedMarker: {},
-    selectedPlace: {},
-    animation: 0
-  };
-
-  onMarkerClick = (props, marker) => {
-    this.setState({
-      selectedPlace: props,
-      clickedMarker: marker,
-      showInfoWindow: true,
-      animation: 1
-    });
-  }
   
-  onInfoWindowClose = () => {
-    this.setState({
-      animation: 0
-    });
-  }
-
   render() {
     const style = {};
 
-    
     return (
       <Map
         google={this.props.google}
@@ -41,24 +19,26 @@ export class MapContainer extends Component {
       >
         {this.props.locations.map(marker => (
           <Marker
-            onClick={this.onMarkerClick}
+            onClick={this.props.onMarkerClick}
             key={marker.venue.id}
             position={{ lat: marker.venue.location.lat, lng: marker.venue.location.lng }}
             name={marker.venue.name}
             address={marker.venue.location.address}
-            animation={marker.venue.name === this.state.clickedMarker.name ? this.state.animation : null}
+            animation={marker.venue.name === this.props.appState.clickedMarker.name ? this.props.appState.animation : null}
+            ref={this.props.addMarker}
           />
-        ))}
+        )
+      )}
 
         <InfoWindow
-          onClose={this.onInfoWindowClose}
-          marker={this.state.clickedMarker}
-          visible={this.state.showInfoWindow}
+          onClose={this.props.onInfoWindowClose}
+          marker={this.props.appState.clickedMarker}
+          visible={this.props.appState.showInfoWindow}
         >
           <div>
-            <h1>{this.state.selectedPlace.name}</h1>
-            <p>Adres: {this.state.selectedPlace.address}</p>
-            <img src="" alt="" />
+            <h1>{this.props.appState.clickedMarker.name}</h1>
+            <p>Adres: {this.props.appState.clickedMarker.address}</p>
+ 
           </div>
         </InfoWindow>
       </Map>
