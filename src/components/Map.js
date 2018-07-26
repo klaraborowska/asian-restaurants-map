@@ -17,7 +17,7 @@ export class MapContainer extends Component {
         zoom={13}
         gestureHandling={"greedy"}
       >
-        {this.props.locations.map(marker => (
+        {this.props.filteredLocations.map(marker => (
           <Marker
             onClick={this.props.onMarkerClick}
             key={marker.venue.id}

@@ -8,6 +8,7 @@ class App extends Component {
 
   state = {
     locations: [],
+    filteredLocations: [],
     showingInfoWindow: false,
     clickedMarker: {},
     selectedPlace: {},
@@ -18,7 +19,6 @@ class App extends Component {
 
   addMarker = (marker) => {
     this.allMarkers.push(marker)
-    console.log(marker)
   }
 
   onMarkerClick = (props, marker) => {
@@ -29,7 +29,7 @@ class App extends Component {
       animation: 1
     });
 
-    console.log(this.state.clickedMarker)
+    //console.log(this.state.clickedMarker)
   }
 
   onListItemClick = (e) => {
@@ -47,6 +47,13 @@ class App extends Component {
     });
   }
 
+  filterLocations = (e) => {
+    let searchQuery = e.target.value;
+    this.setState({
+      filteredLocations: this.state.locations.filter(el => el.venue.name.toLowerCase().includes(searchQuery.toLowerCase()) )
+    });
+  }
+
   componentDidMount() {
     const key = 'D5SNMMUIS3DTXRQ5FN5G1UBU4XKRSEGVR0KXMS5KRB1YZGSY';
     const secret= 'NAJXBKSQ4VEKRWJPDEGVPW1QMASLTUEGXWYDBOVJG2ODFF5J'
@@ -55,7 +62,8 @@ class App extends Component {
     .then(res => {
       const result = res.response.groups[0].items;
       this.setState({
-        locations: result
+        locations: result,
+        filteredLocations: result
       });
       console.log(result)
     })
@@ -74,9 +82,9 @@ class App extends Component {
         </header>
         <div className="wrapper">
           <aside className="side-list">
-            <input type="text" value="Search" id="input" className="search" />
+            <input type="text" placeholder="Search" id="input" className="search" onChange={this.filterLocations} />
             <ul className="list">
-              {this.state.locations.map(item => (
+              {this.state.filteredLocations.map(item => (
                 <ListItem 
                   name={item.venue.name} 
                   key={item.venue.id} 
@@ -89,7 +97,7 @@ class App extends Component {
           <div className="map">
             <MapContainer
               google={window.google}
-              locations={this.state.locations}
+              filteredLocations={this.state.filteredLocations}
               addMarker={this.addMarker}
               onMarkerClick={this.onMarkerClick}
               onInfoWindowClose={this.onInfoWindowClose}
