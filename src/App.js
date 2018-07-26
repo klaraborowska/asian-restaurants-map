@@ -9,7 +9,7 @@ class App extends Component {
   state = {
     locations: [],
     filteredLocations: [],
-    showingInfoWindow: false,
+    showInfoWindow: false,
     clickedMarker: {},
     selectedPlace: {},
     animation: 0
@@ -18,7 +18,10 @@ class App extends Component {
   allMarkers = [];
 
   addMarker = (marker) => {
-    this.allMarkers.push(marker)
+    if (marker) {
+      this.allMarkers.push(marker)
+    }
+    
   }
 
   onMarkerClick = (props, marker) => {
@@ -32,6 +35,13 @@ class App extends Component {
     //console.log(this.state.clickedMarker)
   }
 
+  onMapClick = () => {
+    this.setState({
+      showInfoWindow: false,
+      animation: 0
+    });
+  }
+
   onListItemClick = (e) => {
     const clicked = this.allMarkers.filter(el => el.marker.name === e.target.innerHTML)
     this.setState({
@@ -39,18 +49,22 @@ class App extends Component {
       showInfoWindow: true,
       animation: 1
     }); 
+    console.log(clicked)
   }
 
   onInfoWindowClose = () => {
     this.setState({
       animation: 0,
+      showInfoWindow: false
     });
   }
 
   filterLocations = (e) => {
     let searchQuery = e.target.value;
     this.setState({
-      filteredLocations: this.state.locations.filter(el => el.venue.name.toLowerCase().includes(searchQuery.toLowerCase()) )
+      filteredLocations: this.state.locations.filter(el => el.venue.name.toLowerCase().includes(searchQuery.toLowerCase()) ),
+      showInfoWindow: false,
+      animation: 0
     });
   }
 
@@ -101,6 +115,7 @@ class App extends Component {
               addMarker={this.addMarker}
               onMarkerClick={this.onMarkerClick}
               onInfoWindowClose={this.onInfoWindowClose}
+              onMapClick={this.onMapClick}
               appState={this.state}
             />
           </div>

@@ -16,6 +16,7 @@ export class MapContainer extends Component {
         }}
         zoom={13}
         gestureHandling={"greedy"}
+        onClick={this.props.onMapClick}
       >
         {this.props.filteredLocations.map(marker => (
           <Marker
