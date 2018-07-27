@@ -91,6 +91,8 @@ class App extends Component {
     })
     .catch(error => {
       console.log(error)
+      document.querySelector('.wrapper').style.display = "none";
+      document.querySelector('.api-failure').style.display = "block";
     })
   }
   
@@ -105,7 +107,6 @@ class App extends Component {
         <div className="wrapper">
           <aside className="side-list">
             <form className="search-form">
-              
               <input type="text" id="input" className="search" onChange={this.onSearchLocation} onFocus={this.styleSearchField} required/>
               <label htmlFor="input" className="search-label" >Search here</label>
             </form>
@@ -134,8 +135,8 @@ class App extends Component {
             />
           </div>
         </div>
-        <div className="map-failure">
-          Test, mapa nie działa.
+        <div className="api-failure">
+          Test, api nie działa.
         </div>
       </div>
     );
@@ -147,5 +148,6 @@ export default App;
 
 window.gm_authFailure = function() {
   document.querySelector('.wrapper').style.display = "none";
-  document.querySelector('.map-failure').style.display = "block";
+  document.querySelector('.api-failure').style.display = "block";
+  document.querySelector('.api-failure').innerHTML = "Test, mapa nie działa.";
 }
