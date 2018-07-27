@@ -81,7 +81,7 @@ class App extends Component {
     const key = "D5SNMMUIS3DTXRQ5FN5G1UBU4XKRSEGVR0KXMS5KRB1YZGSY";
     const secret = "NAJXBKSQ4VEKRWJPDEGVPW1QMASLTUEGXWYDBOVJG2ODFF5J";
     fetch(
-      `https://api.foursquare.com/v2/venues/explore?ll=52.2246756,21.0122287&categoryId=4bf58dd8d48988d142941735&checkin=intent&radius=6000&limit=30&client_id=${key}&client_secret=${secret}&v=20180726`
+      `https://api.foursquare.com/v2/venues/explore?ll=52.2246756,21.0122287&categoryId=4bf58dd8d48988d142941735&checkin=intent&radius=6000&limit=50&client_id=${key}&client_secret=${secret}&v=20180726`
     )
       .then(response => response.json())
       .then(res => {
@@ -95,7 +95,7 @@ class App extends Component {
       .catch(error => {
         console.log(error);
         document.querySelector(".wrapper").style.display = "none";
-        document.querySelector(".api-failure").style.display = "block";
+        document.querySelector(".api-failure").style.display = "flex";
       });
   }
 
@@ -104,7 +104,7 @@ class App extends Component {
       <div className="App">
         <header className="header">
           <Button />
-          <h1 className="header-title">Warsaw's Theaters</h1>
+          <h1 className="header-title">Asian Restaurants in Warsaw</h1>
         </header>
         <div className="wrapper">
           <aside className="side-list">
@@ -128,7 +128,11 @@ class App extends Component {
           </div>
         </div>
 
-        <div className="api-failure">Test, api nie działa.</div>
+        <div className="api-failure">
+          <div className="alert-icon"></div>
+          <p>Sorry, the data could not be loaded.</p>
+          <p>Please try to refresh the page.</p>
+        </div>
         <footer className="footer">Icons by Flaticon</footer>
       </div>
     );
@@ -139,6 +143,5 @@ export default App;
 
 window.gm_authFailure = function() {
   document.querySelector(".wrapper").style.display = "none";
-  document.querySelector(".api-failure").style.display = "block";
-  document.querySelector(".api-failure").innerHTML = "Test, mapa nie działa.";
+  document.querySelector(".api-failure").style.display = "flex";
 };

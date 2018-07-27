@@ -6,15 +6,19 @@ html {
   box-sizing: inherit;
 }
 
-body, ul {
+body, ul, p {
   margin: 0;
   padding: 0;
   font-family: "Lato";
-  color: #333;
+  color: #555;
 }
 
 .list {
   list-style: none;
+}
+
+body {
+ background-color: #555;
 }
 
 .App {
@@ -23,45 +27,49 @@ body, ul {
 }
 
 .header {
-  height: 80px;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #555;
-  background-color: #fff;
+  border-bottom: 1px solid rgb(238, 238, 238);
   position: relative;
+  padding: 0 20px 0 80px;
+  box-shadow: 0 5px 20px 0 rgba(0,0,0, 0.1);
+  background-color: #fff;
 }
 
 .header-title {
   font-size: 30px;
+  text-align: center;
+  font-weight: normal;
 }
 
 .wrapper {
   display: flex;
   height: calc(100vh - 160px);
-
+  background-color: #fff;
 }
 
 button {
   position: absolute;
   top: 25px;
   left: 30px;
-  color: #333;
-  background-image: url('./utils/icons/menu.svg');
-  height: 30px;
-  width: 30px;
+  background-image: url('./utils/icons/menu.png');
+  height: 32px;
+  width: 32px;
   background-color: transparent;
   border: none;
   cursor: pointer;
+  color: #fcaf20;
 }
 
 .side-list {
   flex-basis: 300px;
-  background-color: #333;
   overflow-y: scroll;
   visibility: visible;
   transition: all 0.3s;
   opacity: 1;
+ 
 }
 
 .hidden {
@@ -72,7 +80,6 @@ button {
 
 .map {
   flex: 1;
-  background-color: rgb(182, 181, 181);
   position: relative;
 }
 
@@ -81,19 +88,31 @@ button {
   background-color: #fff;
   display: none;
   text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+}
+
+.api-failure p {
+  padding: 5px 20px;
 }
 
 .list-item {
   padding: 20px 20px 20px 50px;
   color: #333;
   font-size: 14px;
-  color: #fff;
   cursor: pointer;
   transition: all 0.3s;
+  border-bottom: 1px solid rgb(219, 219, 219);
+}
+
+.list-item:first-child {
+  border-top: 1px solid rgb(219, 219, 219);
 }
 
 .list-item:hover, .active {
-  background-color: rgb(70, 70, 70);
+  background-color: #fcaf20;
 }
 
 .list-item:last-child {
@@ -106,15 +125,15 @@ button {
   padding: 20px 20px 10px 30px;
   border: none;
   height: 50px;
-  background-color: #fff;
   border-radius: 2px;
+  border-bottom: 2px solid rgb(219, 219, 219);
+  box-shadow: 0 5px 20px 0 rgba(0,0,0, 0.1);
 }
 
 .search-label {
   position: absolute;
   top: 35px;
   left: 55px;
-  color: rgb(255, 81, 0);
   z-index: 1;
   transition: all 0.3s;
   font-size: 14px;
@@ -129,12 +148,29 @@ button {
   top: 25px;
   left: 30px;
   font-size: 12px;
+  color: rgb(214, 130, 3);
 }
 
 .footer {
   position: absolute;
   bottom: 10px;
   right: 40px;
+  color: #fff;
 }
 
 
+.alert-icon {
+  background-image: url('./utils/icons/warning.svg');
+  margin-bottom: 10px;
+  height: 60px;
+  width: 60px;
+}
+
+.info-window-title {
+  font-size: 20px;
+  padding-left: 10px;
+}
+.info-window-details {
+  font-size: 16px;
+  padding: 0 0 10px 10px;
+}
