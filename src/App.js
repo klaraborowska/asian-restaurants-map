@@ -47,6 +47,8 @@ class App extends Component {
       showInfoWindow: true,
       animation: 1
     }); 
+    document.querySelectorAll('.list-item').forEach(el => el.classList.remove('active'))
+    e.target.classList.add('active')
     //console.log(clicked)
   }
 
@@ -105,7 +107,7 @@ class App extends Component {
             <form className="search-form">
               
               <input type="text" id="input" className="search" onChange={this.onSearchLocation} onFocus={this.styleSearchField} required/>
-              <label for="input" className="search-label" >Search here</label>
+              <label htmlFor="input" className="search-label" >Search here</label>
             </form>
             
             <ul className="list">
@@ -114,6 +116,7 @@ class App extends Component {
                   name={item.venue.name} 
                   key={item.venue.id} 
                   onListItemClick={this.onListItemClick}
+                  className="list-item"
                 />
               ))}
             </ul>
@@ -131,9 +134,18 @@ class App extends Component {
             />
           </div>
         </div>
+        <div className="map-failure">
+          Test, mapa nie działa.
+        </div>
       </div>
     );
   }
 }
 
 export default App;
+
+
+window.gm_authFailure = function() {
+  document.querySelector('.wrapper').style.display = "none";
+  document.querySelector('.map-failure').style.display = "block";
+}
