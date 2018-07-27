@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
+import React from "react";
 
-class ListItem extends Component {
+const ListItem = props => {
+  return (
+    <li className="list-item" onClick={props.onListItemClick}>
+      {props.name}
+    </li>
+  );
+};
 
-  render() {
-    return(
-      <li className="list-item" onClick={this.props.onListItemClick}>{this.props.name}</li>
-    )
-  }
-}
-
-export default ListItem
+export default ListItem;

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import { Map, InfoWindow, Marker } from "google-maps-react";
 
-export class MapContainer extends Component {
-  
+class MapContainer extends Component {
   render() {
     const style = {};
 
@@ -22,14 +21,20 @@ export class MapContainer extends Component {
           <Marker
             onClick={this.props.onMarkerClick}
             key={marker.venue.id}
-            position={{ lat: marker.venue.location.lat, lng: marker.venue.location.lng }}
+            position={{
+              lat: marker.venue.location.lat,
+              lng: marker.venue.location.lng
+            }}
             name={marker.venue.name}
             address={marker.venue.location.address}
-            animation={marker.venue.name === this.props.appState.clickedMarker.name ? this.props.appState.animation : null}
+            animation={
+              marker.venue.name === this.props.appState.clickedMarker.name
+                ? this.props.appState.animation
+                : null
+            }
             ref={this.props.addMarker}
           />
-        )
-      )}
+        ))}
 
         <InfoWindow
           onClose={this.props.onInfoWindowClose}
@@ -39,14 +44,10 @@ export class MapContainer extends Component {
           <div>
             <h1>{this.props.appState.clickedMarker.name}</h1>
             <p>Adres: {this.props.appState.clickedMarker.address}</p>
- 
           </div>
         </InfoWindow>
       </Map>
     );
   }
 }
-
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyDy6nwZDZ9oHbjpRhtrTZr4lPzEgQnKfzE"
-})(MapContainer);
+export default MapContainer;
