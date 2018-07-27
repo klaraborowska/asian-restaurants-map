@@ -38,6 +38,9 @@ class App extends Component {
       showInfoWindow: false,
       animation: 0
     });
+    document
+      .querySelectorAll(".list-item")
+      .forEach(el => el.classList.remove("active"));
   };
 
   onListItemClick = e => {
@@ -67,7 +70,7 @@ class App extends Component {
     let searchQuery = e.target.value;
     this.setState({
       filteredLocations: this.state.locations.filter(el =>
-        el.venue.name.toLowerCase().includes(searchQuery.toLowerCase())
+        el.venue.name.toLowerCase().includes(searchQuery.toLowerCase()) || el.venue.categories[0].shortName.toLowerCase().includes(searchQuery.toLowerCase())
       ),
       showInfoWindow: false,
       animation: 0
@@ -78,7 +81,7 @@ class App extends Component {
     const key = "D5SNMMUIS3DTXRQ5FN5G1UBU4XKRSEGVR0KXMS5KRB1YZGSY";
     const secret = "NAJXBKSQ4VEKRWJPDEGVPW1QMASLTUEGXWYDBOVJG2ODFF5J";
     fetch(
-      `https://api.foursquare.com/v2/venues/explore?ll=52.2246756,21.0122287&categoryId=4bf58dd8d48988d137941735&client_id=${key}&client_secret=${secret}&v=20180726`
+      `https://api.foursquare.com/v2/venues/explore?ll=52.2246756,21.0122287&categoryId=4bf58dd8d48988d142941735&checkin=intent&radius=6000&limit=30&client_id=${key}&client_secret=${secret}&v=20180726`
     )
       .then(response => response.json())
       .then(res => {
@@ -126,6 +129,7 @@ class App extends Component {
         </div>
 
         <div className="api-failure">Test, api nie działa.</div>
+        <footer className="footer">Icons by Flaticon</footer>
       </div>
     );
   }

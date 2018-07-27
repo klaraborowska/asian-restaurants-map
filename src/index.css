@@ -13,17 +13,13 @@ body, ul {
   color: #333;
 }
 
-body {
-  background-color: rgb(197, 197, 197);
-}
-
 .list {
   list-style: none;
 }
 
 .App {
   margin: 40px;
-  box-shadow: 0 5px 20px rgba(0,0,0, 0.2);
+  box-shadow: 0 5px 20px rgba(0,0,0, 0.3);
 }
 
 .header {
@@ -121,6 +117,7 @@ button {
   color: rgb(255, 81, 0);
   z-index: 1;
   transition: all 0.3s;
+  font-size: 14px;
 }
 
 .search-form {
@@ -134,6 +131,10 @@ button {
   font-size: 12px;
 }
 
-
+.footer {
+  position: absolute;
+  bottom: 10px;
+  right: 40px;
+}
 
 

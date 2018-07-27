@@ -43,7 +43,7 @@ class MapContainer extends Component {
         >
           <div>
             <h1>{this.props.appState.clickedMarker.name}</h1>
-            <p>Adres: {this.props.appState.clickedMarker.address}</p>
+            <p>address: {this.props.appState.clickedMarker.address}</p>
           </div>
         </InfoWindow>
       </Map>

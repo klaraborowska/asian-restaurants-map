@@ -11,7 +11,7 @@ const Search = props => {
         required
       />
       <label htmlFor="input" className="search-label">
-        Search
+        Search by name or category
       </label>
     </form>
   );
