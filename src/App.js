@@ -21,7 +21,6 @@ class App extends Component {
     if (marker) {
       this.allMarkers.push(marker)
     }
-    
   }
 
   onMarkerClick = (props, marker) => {
@@ -31,7 +30,6 @@ class App extends Component {
       showInfoWindow: true,
       animation: 1
     });
-
     //console.log(this.state.clickedMarker)
   }
 
@@ -49,7 +47,7 @@ class App extends Component {
       showInfoWindow: true,
       animation: 1
     }); 
-    console.log(clicked)
+    //console.log(clicked)
   }
 
   onInfoWindowClose = () => {
@@ -59,13 +57,21 @@ class App extends Component {
     });
   }
 
-  filterLocations = (e) => {
+  onSearchLocation = (e) => {
     let searchQuery = e.target.value;
     this.setState({
       filteredLocations: this.state.locations.filter(el => el.venue.name.toLowerCase().includes(searchQuery.toLowerCase()) ),
       showInfoWindow: false,
       animation: 0
     });
+  }
+
+  styleSearchField = () => {
+    document.querySelector('.search-label').classList.add('search-top')
+  }
+
+  styleSearchFieldTest = () => {
+    document.querySelector('.search-label').classList.remove('search-top')
   }
 
   componentDidMount() {
@@ -96,7 +102,12 @@ class App extends Component {
         </header>
         <div className="wrapper">
           <aside className="side-list">
-            <input type="text" placeholder="Search" id="input" className="search" onChange={this.filterLocations} />
+            <form className="search-form">
+              
+              <input type="text" id="input" className="search" onChange={this.onSearchLocation} onFocus={this.styleSearchField} required/>
+              <label for="input" className="search-label" >Search here</label>
+            </form>
+            
             <ul className="list">
               {this.state.filteredLocations.map(item => (
                 <ListItem 
