@@ -33,6 +33,7 @@ body {
   align-items: center;
   color: #555;
   background-color: #fff;
+  position: relative;
 }
 
 .header-title {
@@ -47,9 +48,15 @@ body {
 
 button {
   position: absolute;
-  top: 60px;
-  left: 60px;
+  top: 25px;
+  left: 30px;
   color: #333;
+  background-image: url('./utils/icons/menu.svg');
+  height: 30px;
+  width: 30px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .side-list {
@@ -126,3 +133,7 @@ button {
   left: 30px;
   font-size: 12px;
 }
+
+
+
+

@@ -4,7 +4,7 @@ import { Map, InfoWindow, Marker } from "google-maps-react";
 class MapContainer extends Component {
   render() {
     const style = {};
-
+  
     return (
       <Map
         google={this.props.google}

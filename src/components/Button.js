@@ -8,7 +8,6 @@ class Button extends Component {
   render() {
     return (
       <button type="button" onClick={this.hideLocationsList}>
-        Hamburger
       </button>
     );
   }
