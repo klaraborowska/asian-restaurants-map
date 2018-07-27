@@ -96,6 +96,9 @@ class App extends Component {
     })
   }
   
+  hideMenu = () => {
+    document.querySelector('.side-list').classList.toggle('hidden');
+  }
 
   render() {
 
@@ -105,6 +108,7 @@ class App extends Component {
           <h1 className="header-title">Warsaw's Theaters</h1>
         </header>
         <div className="wrapper">
+          <button type="button" onClick={this.hideMenu}>Hamburger</button>
           <aside className="side-list">
             <form className="search-form">
               <input type="text" id="input" className="search" onChange={this.onSearchLocation} onFocus={this.styleSearchField} required/>

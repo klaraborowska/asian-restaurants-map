@@ -41,13 +41,30 @@ body {
 
 .wrapper {
   display: flex;
-  height: calc(100vh - 160px)
+  height: calc(100vh - 160px);
+
+}
+
+button {
+  position: absolute;
+  top: 60px;
+  left: 60px;
+  color: #333;
 }
 
 .side-list {
   flex-basis: 300px;
   background-color: #333;
   overflow-y: scroll;
+  visibility: visible;
+  transition: all 0.3s;
+  opacity: 1;
+}
+
+.hidden {
+  visibility: hidden;
+  flex-basis: 0;
+  opacity: 0;
 }
 
 .map {
