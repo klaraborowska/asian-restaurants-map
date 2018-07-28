@@ -22,8 +22,8 @@ class App extends Component {
     searchQuery: ""
   };
 
+  // add all rendered markers to array to be able to iterrate through all markers
   allMarkers = [];
-
   addMarker = marker => {
     if (marker) {
       this.allMarkers.push(marker);
@@ -81,6 +81,7 @@ class App extends Component {
     });
   };
 
+  // imitate a click on list item, when enter key is pressed
   clickListItem = e => {
     if (e.keyCode === 13) {
       e.target.click();
@@ -97,12 +98,6 @@ class App extends Component {
       this.setState({ menuOpen: false });
     } else {
       this.setState({ menuOpen: true });
-    }
-    if (this.state.filteredLocations.length === 0) {
-      this.setState({
-        filteredLocations: this.state.locations,
-        searchQuery: ""
-      });
     }
   };
 
@@ -126,6 +121,7 @@ class App extends Component {
         this.setState({ error: true });
       });
 
+    // handle error, when google map fails to load
     window.gm_authFailure = () => this.setState({ error: true });
     if (window.google === undefined) {
       this.setState({ error: true });
@@ -174,7 +170,9 @@ class App extends Component {
           <Error />
         )}
         <footer className="footer">
-          <p className="footer-copyrights">All icons from Flaticon. Restaurants data from Foursquare API</p>
+          <p className="footer-copyrights">
+            All icons from Flaticon. Restaurants data from Foursquare API
+          </p>
         </footer>
       </div>
     );

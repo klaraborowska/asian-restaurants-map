@@ -1,6 +1,6 @@
 .App {
   margin: 40px;
-  box-shadow: 0 5px 20px rgba(0,0,0, 0.3);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
 }
 
 /***** HEADER *****/
@@ -13,12 +13,12 @@
   border-bottom: 1px solid rgb(238, 238, 238);
   position: relative;
   padding: 0 20px 0 80px;
-  box-shadow: 0 5px 20px 0 rgba(0,0,0, 0.1);
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
   background-color: #fff;
 }
 
 .header-title {
-  font-size: 30px;
+  font-size: 2.2em;
   text-align: center;
   font-weight: normal;
 }
@@ -61,10 +61,10 @@
   left: 55px;
   z-index: 1;
   transition: all 0.3s;
-  font-size: 14px;
+  font-size: 0.9em;
 }
 
-.search-input { 
+.search-input {
   width: 100%;
   height: 40px;
   padding: 20px 20px 10px 30px;
@@ -72,20 +72,20 @@
   height: 50px;
   border-radius: 2px;
   border-bottom: 2px solid rgb(219, 219, 219);
-  box-shadow: 0 5px 20px 0 rgba(0,0,0, 0.1);
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
-.search-input:focus + .search-label, .search-input:valid + .search-label {
+.search-input:focus+.search-label, .search-input:valid+.search-label {
   top: 23px;
   left: 30px;
-  font-size: 12px;
+  font-size: 0.75em;
   color: #d68203;
 }
 
 .list-item {
   padding: 20px 20px 20px 50px;
   color: #333;
-  font-size: 14px;
+  font-size: 1em;
   cursor: pointer;
   transition: all 0.3s;
   border-bottom: 1px solid rgb(219, 219, 219);
@@ -99,8 +99,7 @@
   border-bottom: none;
 }
 
-.list-item:hover, 
-.list-item:focus {
+.list-item:hover, .list-item:focus {
   background-color: #fcaf20;
   padding-left: 70px;
 }
@@ -114,21 +113,21 @@
 
 .info-window {
   text-align: center;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .info-window-title {
-  font-size: 20px;
+  font-size: 1.5em;
   padding-left: 10px;
 }
 
 .info-window-details {
-  font-size: 16px;
+  font-size: 1.2em;
   padding: 0 0 10px 10px;
   font-weight: bold;
 }
 
-.info-window-icon,
-.alert-icon {
+.info-window-icon, .alert-icon {
   background-image: url('./utils/icons/dish.png');
   background-position: center;
   background-repeat: no-repeat;
@@ -147,7 +146,7 @@
 
 .footer-copyrights {
   color: #fff;
-  font-size: 13px;
+  font-size: 0.9em;
 }
 
 /***** API ERROR *****/
@@ -160,7 +159,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 26px;
+  font-size: 1.8em;
 }
 
 .alert-icon {
@@ -170,4 +169,55 @@
 
 .alert-text {
   padding: 5px 20px;
+}
+
+@media only screen and (max-width: 850px) {
+  .App {
+    margin: 0;
+    height: 100vh;
+  }
+  .header-title {
+    font-size: 1.8em;
+  }
+  .button {
+    top: 15px;
+  }
+  .wrapper {
+    height: calc(100vh - 80px);
+  }
+  .footer-copyrights {
+    color: #000;
+    background-color: #fff;
+    padding: 5px 5px 5px 20px;
+  }
+  .footer {
+    bottom: 0;
+    right: 0;
+  }
+  .api-failure {
+    min-height: calc(100vh - 160px);
+    font-size: 1.5em;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .header-title {
+    font-size: 1.5em;
+  }
+  .wrapper {
+    flex-direction: column;
+  }
+  .map {
+    order: -1;
+    flex: 1;
+  }
+  .info-window-title {
+    font-size: 1.3em;
+  }
+  .info-window-details {
+    font-size: 1.1em;
+  }
+  .footer-copyrights {
+    font-size: 0.7em;
+  }
 }

@@ -50,7 +50,6 @@ class MapContainer extends Component {
           lng: 21.0122287
         }}
         zoom={13}
-        gestureHandling={"greedy"}
         onClick={this.props.onMapClick}
       >
         {this.props.appState.filteredLocations.map(marker => (
@@ -90,10 +89,10 @@ class MapContainer extends Component {
               }}
             />
             <p className="info-window-details">
-              Address:
+              Address:{" "}
               {this.props.appState.clickedMarker.address
                 ? this.props.appState.clickedMarker.address
-                : " no address available"}
+                : "no address available"}
             </p>
             <p className="info-window-details">
               Category: {this.addCategory()}

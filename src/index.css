@@ -14,10 +14,17 @@ body, html, ul, p {
 
 body {
   background-color: #555;
-  font-family: "Lato";
+  font-family: 'Rajdhani', sans-serif;
   color: #555;
- }
+  font-size: 16px;
+}
 
 ul {
   list-style: none;
+}
+
+@media only screen and (max-width: 850px) {
+  body {
+    background-color: #fff;
+  }
 }
