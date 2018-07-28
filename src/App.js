@@ -7,7 +7,6 @@ import LocationsList from "./components/LocationsList";
 import MapContainer from "./components/MapContainer";
 import Search from "./components/Search";
 
-
 class App extends Component {
   state = {
     locations: [],
@@ -16,7 +15,8 @@ class App extends Component {
     clickedMarker: {},
     selectedPlace: {},
     animation: 0,
-    error: false
+    error: false,
+    menuOpen: true
   };
 
   allMarkers = [];
@@ -97,6 +97,14 @@ class App extends Component {
     element.classList.add("active");
   };
 
+  toggleMenu = () => {
+    if (this.state.menuOpen) {
+      this.setState({ menuOpen: false })
+    } else {
+      this.setState({ menuOpen: true })
+    }
+  };
+
   componentDidMount() {
     const key = "D5SNMMUIS3DTXRQ5FN5G1UBU4XKRSEGVR0KXMS5KRB1YZGSY";
     const secret = "NAJXBKSQ4VEKRWJPDEGVPW1QMASLTUEGXWYDBOVJG2ODFF5J";
@@ -126,23 +134,27 @@ class App extends Component {
 
   render() {
     const noError = !this.state.error;
+    const menuOpen = this.state.menuOpen;
 
     return (
       <div className="App">
         <header className="header">
-          <Button />
+          <Button toggleMenu={this.toggleMenu} />
           <h1 className="header-title">Asian Restaurants in Warsaw</h1>
         </header>
 
         {noError ? (
           <div className="wrapper">
-            <aside className="side-list">
-              <Search onSearchLocation={this.onSearchLocation} />
-              <LocationsList
-                filteredLocations={this.state.filteredLocations}
-                onListItemClick={this.onListItemClick}
-              />
-            </aside>
+            {menuOpen && (
+              <aside className="side-list">
+                <Search onSearchLocation={this.onSearchLocation} />
+                <LocationsList
+                  filteredLocations={this.state.filteredLocations}
+                  onListItemClick={this.onListItemClick}
+                />
+              </aside>
+            )}
+
             <div className="map">
               <MapContainer
                 google={window.google}
@@ -170,4 +182,3 @@ class App extends Component {
 
 export default App;
 
-window.gm_authFailure = function() {};

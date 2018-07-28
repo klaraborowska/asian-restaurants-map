@@ -4,6 +4,7 @@ html {
 
 *, *::before, *::after {
   box-sizing: inherit;
+  outline-color: #d68203;
 }
 
 body, ul, p {
@@ -65,17 +66,8 @@ button {
 .side-list {
   flex-basis: 300px;
   overflow-y: scroll;
-  visibility: visible;
-  transition: all 0.3s;
-  opacity: 1;
- 
 }
 
-.hidden {
-  visibility: hidden;
-  flex-basis: 0;
-  opacity: 0;
-}
 
 .map {
   flex: 1;
@@ -110,13 +102,9 @@ button {
   border-top: 1px solid rgb(219, 219, 219);
 }
 
-.list-item:hover, .active {
-  padding: 20px 20px 20px 50px;
-  color: #333;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.3s;
-  border-bottom: 1px solid rgb(219, 219, 219);
+.list-item:hover, 
+.list-item:focus,
+.active {
   background-color: #fcaf20;
 }
 
