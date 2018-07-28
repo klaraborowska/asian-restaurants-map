@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
-import MapContainer from "./components/MapContainer";
+
 import Button from "./components/Button";
-import Search from "./components/Search";
+import Error from "./components/Error";
 import LocationsList from "./components/LocationsList";
+import MapContainer from "./components/MapContainer";
+import Search from "./components/Search";
+
 
 class App extends Component {
   state = {
@@ -12,7 +15,8 @@ class App extends Component {
     showInfoWindow: false,
     clickedMarker: {},
     selectedPlace: {},
-    animation: 0
+    animation: 0,
+    error: false
   };
 
   allMarkers = [];
@@ -30,7 +34,13 @@ class App extends Component {
       showInfoWindow: true,
       animation: 1
     });
-    //console.log(this.state.clickedMarker)
+
+    this.removeActiveClass();
+    document.querySelectorAll(".list-item").forEach(el => {
+      if (el.textContent === marker.name) {
+        el.classList.add("active");
+      }
+    });
   };
 
   onMapClick = () => {
@@ -38,25 +48,20 @@ class App extends Component {
       showInfoWindow: false,
       animation: 0
     });
-    document
-      .querySelectorAll(".list-item")
-      .forEach(el => el.classList.remove("active"));
+    this.removeActiveClass();
   };
 
   onListItemClick = e => {
     const clicked = this.allMarkers.filter(
-      el => el.marker.name === e.target.innerHTML
+      el => el.marker.name === e.target.textContent
     );
     this.setState({
       clickedMarker: clicked[0].marker,
       showInfoWindow: true,
       animation: 1
     });
-    document
-      .querySelectorAll(".list-item")
-      .forEach(el => el.classList.remove("active"));
-    e.target.classList.add("active");
-    //console.log(clicked)
+    this.removeActiveClass();
+    this.addActiveClass(e.target);
   };
 
   onInfoWindowClose = () => {
@@ -69,12 +74,27 @@ class App extends Component {
   onSearchLocation = e => {
     let searchQuery = e.target.value;
     this.setState({
-      filteredLocations: this.state.locations.filter(el =>
-        el.venue.name.toLowerCase().includes(searchQuery.toLowerCase()) || el.venue.categories[0].shortName.toLowerCase().includes(searchQuery.toLowerCase())
+      filteredLocations: this.state.locations.filter(
+        el =>
+          el.venue.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          el.venue.categories[0].shortName
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())
       ),
       showInfoWindow: false,
       animation: 0
     });
+    this.removeActiveClass();
+  };
+
+  removeActiveClass = () => {
+    document
+      .querySelectorAll(".list-item")
+      .forEach(el => el.classList.remove("active"));
+  };
+
+  addActiveClass = element => {
+    element.classList.add("active");
   };
 
   componentDidMount() {
@@ -86,54 +106,63 @@ class App extends Component {
       .then(response => response.json())
       .then(res => {
         const result = res.response.groups[0].items;
+        console.log(result);
+
         this.setState({
           locations: result,
           filteredLocations: result
         });
-        console.log(result);
       })
       .catch(error => {
         console.log(error);
-        document.querySelector(".wrapper").style.display = "none";
-        document.querySelector(".api-failure").style.display = "flex";
+        this.setState({ error: true });
       });
+
+    window.gm_authFailure = () => this.setState({ error: true });
+    if (window.google === undefined) {
+      this.setState({ error: true });
+    }
   }
 
   render() {
+    const noError = !this.state.error;
+
     return (
       <div className="App">
         <header className="header">
           <Button />
           <h1 className="header-title">Asian Restaurants in Warsaw</h1>
         </header>
-        <div className="wrapper">
-          <aside className="side-list">
-            <Search onSearchLocation={this.onSearchLocation} />
-            <LocationsList
-              filteredLocations={this.state.filteredLocations}
-              onListItemClick={this.onListItemClick}
-            />
-          </aside>
 
-          <div className="map">
-            <MapContainer
-              google={window.google}
-              filteredLocations={this.state.filteredLocations}
-              addMarker={this.addMarker}
-              onMarkerClick={this.onMarkerClick}
-              onInfoWindowClose={this.onInfoWindowClose}
-              onMapClick={this.onMapClick}
-              appState={this.state}
-            />
+        {noError ? (
+          <div className="wrapper">
+            <aside className="side-list">
+              <Search onSearchLocation={this.onSearchLocation} />
+              <LocationsList
+                filteredLocations={this.state.filteredLocations}
+                onListItemClick={this.onListItemClick}
+              />
+            </aside>
+            <div className="map">
+              <MapContainer
+                google={window.google}
+                filteredLocations={this.state.filteredLocations}
+                addMarker={this.addMarker}
+                onMarkerClick={this.onMarkerClick}
+                onInfoWindowClose={this.onInfoWindowClose}
+                onMapClick={this.onMapClick}
+                appState={this.state}
+              />
+            </div>
           </div>
-        </div>
-
-        <div className="api-failure">
-          <div className="alert-icon"></div>
-          <p>Sorry, the data could not be loaded.</p>
-          <p>Please try to refresh the page.</p>
-        </div>
-        <footer className="footer">Icons by Flaticon</footer>
+        ) : (
+          <Error />
+        )}
+        <footer className="footer">
+          <p>
+            All icons by Flaticon. Restaurants data fetched from Foursquare API
+          </p>
+        </footer>
       </div>
     );
   }
@@ -141,7 +170,4 @@ class App extends Component {
 
 export default App;
 
-window.gm_authFailure = function() {
-  document.querySelector(".wrapper").style.display = "none";
-  document.querySelector(".api-failure").style.display = "flex";
-};
+window.gm_authFailure = function() {};
