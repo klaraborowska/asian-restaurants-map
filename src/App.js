@@ -7,6 +7,8 @@ import LocationsList from "./components/LocationsList";
 import MapContainer from "./components/MapContainer";
 import Search from "./components/Search";
 
+import "./App.css";
+
 class App extends Component {
   state = {
     locations: [],
@@ -113,7 +115,6 @@ class App extends Component {
       .then(response => response.json())
       .then(res => {
         const result = res.response.groups[0].items;
-        console.log(result);
 
         this.setState({
           locations: result,
@@ -145,7 +146,7 @@ class App extends Component {
         {noError ? (
           <div className="wrapper">
             {menuOpen && (
-              <aside className="side-list">
+              <aside className="sidebar">
                 <Search
                   onSearchLocation={this.onSearchLocation}
                   searchQuery={this.state.searchQuery}
@@ -161,7 +162,6 @@ class App extends Component {
             <div className="map">
               <MapContainer
                 google={window.google}
-                filteredLocations={this.state.filteredLocations}
                 addMarker={this.addMarker}
                 onMarkerClick={this.onMarkerClick}
                 onInfoWindowClose={this.onInfoWindowClose}
@@ -174,9 +174,7 @@ class App extends Component {
           <Error />
         )}
         <footer className="footer">
-          <p>
-            All icons by Flaticon. Restaurants data fetched from Foursquare API
-          </p>
+          <p className="footer-copyrights">All icons from Flaticon. Restaurants data from Foursquare API</p>
         </footer>
       </div>
     );

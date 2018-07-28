@@ -5,13 +5,9 @@ import * as icons from "../utils/icons/Icons";
 const iconImages = icons.icons[0];
 
 class MapContainer extends Component {
-  style = {
-    type: ""
-  };
-
   addCategory = () => {
     let category = "";
-    const location = this.props.filteredLocations.filter(
+    const location = this.props.appState.filteredLocations.filter(
       el => el.venue.name === this.props.appState.clickedMarker.name
     );
 
@@ -43,14 +39,12 @@ class MapContainer extends Component {
   };
 
   render() {
-    const style = {};
     const icon = {
       url: iconImages.marker
     };
     return (
       <Map
         google={this.props.google}
-        style={style}
         initialCenter={{
           lat: 52.2305556,
           lng: 21.0122287
@@ -59,7 +53,7 @@ class MapContainer extends Component {
         gestureHandling={"greedy"}
         onClick={this.props.onMapClick}
       >
-        {this.props.filteredLocations.map(marker => (
+        {this.props.appState.filteredLocations.map(marker => (
           <Marker
             onClick={this.props.onMarkerClick}
             key={marker.venue.id}
@@ -83,24 +77,23 @@ class MapContainer extends Component {
           onClose={this.props.onInfoWindowClose}
           marker={this.props.appState.clickedMarker}
           visible={this.props.appState.showInfoWindow}
-          locations={this.props.filteredLocations}
+          locations={this.props.appState.filteredLocations}
         >
           <div className="info-window">
             <h1 className="info-window-title">
               {this.props.appState.clickedMarker.name}
             </h1>
             <p
-              className="food-icon"
+              className="info-window-icon"
               style={{
                 backgroundImage: `${this.addIcon()}`
               }}
             />
-
             <p className="info-window-details">
-              Address:{" "}
+              Address:
               {this.props.appState.clickedMarker.address
                 ? this.props.appState.clickedMarker.address
-                : "no address available"}
+                : " no address available"}
             </p>
             <p className="info-window-details">
               Category: {this.addCategory()}

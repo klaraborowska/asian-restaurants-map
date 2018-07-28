@@ -3,7 +3,7 @@ import ListItem from "./ListItem";
 
 const LocationsList = props => {
   return (
-    <ul className="list">
+    <ul className="locations-list">
       {props.filteredLocations.map(item => (
         <ListItem
           name={item.venue.name}
