@@ -9,7 +9,7 @@ const LocationsList = props => {
           name={item.venue.name}
           key={item.venue.id}
           onListItemClick={props.onListItemClick}
-          className="list-item"
+          clickListItem={props.clickListItem}
         />
       ))}
     </ul>

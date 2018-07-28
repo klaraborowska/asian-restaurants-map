@@ -1,14 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Button extends Component {
- 
-
-  render() {
-    return (
-      <button type="button" onClick={this.props.toggleMenu} >
-      </button>
-    );
-  }
-}
+const Button = props => {
+  return <button type="button" onClick={props.toggleMenu} />;
+};
 
 export default Button;

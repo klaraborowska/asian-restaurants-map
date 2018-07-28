@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 
 class ListItem extends Component {
-  clickListItem = e => {
-    if (e.keyCode === 13) {
-      e.target.click();
-    }
-  };
+  
 
   render() {
     return (
@@ -13,7 +9,7 @@ class ListItem extends Component {
         className="list-item"
         onClick={this.props.onListItemClick}
         aria-label={this.props.name}
-        onKeyDown={this.clickListItem}
+        onKeyDown={this.props.clickListItem}
         role="button"
         tabIndex="0"
       >

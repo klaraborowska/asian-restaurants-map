@@ -103,9 +103,9 @@ button {
 }
 
 .list-item:hover, 
-.list-item:focus,
-.active {
+.list-item:focus {
   background-color: #fcaf20;
+  padding-left: 70px;
 }
 
 .list-item:last-child {
@@ -156,8 +156,6 @@ button {
   font-size: 13px;
 }
 
-
-
 .alert-icon,
 .food-icon {
   background-image: url('./utils/icons/dish.png');
@@ -182,6 +180,7 @@ button {
   font-size: 20px;
   padding-left: 10px;
 }
+
 .info-window-details {
   font-size: 16px;
   padding: 0 0 10px 10px;

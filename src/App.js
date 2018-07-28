@@ -16,7 +16,8 @@ class App extends Component {
     selectedPlace: {},
     animation: 0,
     error: false,
-    menuOpen: true
+    menuOpen: true,
+    searchQuery: ""
   };
 
   allMarkers = [];
@@ -34,13 +35,6 @@ class App extends Component {
       showInfoWindow: true,
       animation: 1
     });
-
-    this.removeActiveClass();
-    document.querySelectorAll(".list-item").forEach(el => {
-      if (el.textContent === marker.name) {
-        el.classList.add("active");
-      }
-    });
   };
 
   onMapClick = () => {
@@ -48,7 +42,6 @@ class App extends Component {
       showInfoWindow: false,
       animation: 0
     });
-    this.removeActiveClass();
   };
 
   onListItemClick = e => {
@@ -60,8 +53,6 @@ class App extends Component {
       showInfoWindow: true,
       animation: 1
     });
-    this.removeActiveClass();
-    this.addActiveClass(e.target);
   };
 
   onInfoWindowClose = () => {
@@ -72,36 +63,44 @@ class App extends Component {
   };
 
   onSearchLocation = e => {
-    let searchQuery = e.target.value;
+    const query = e.target.value;
+    const filteredLocations = this.state.locations.filter(
+      el =>
+        el.venue.name.toLowerCase().includes(query.toLowerCase()) ||
+        el.venue.categories[0].shortName
+          .toLowerCase()
+          .includes(query.toLowerCase())
+    );
     this.setState({
-      filteredLocations: this.state.locations.filter(
-        el =>
-          el.venue.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          el.venue.categories[0].shortName
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase())
-      ),
+      searchQuery: query,
+      filteredLocations: filteredLocations,
       showInfoWindow: false,
       animation: 0
     });
-    this.removeActiveClass();
   };
 
-  removeActiveClass = () => {
-    document
-      .querySelectorAll(".list-item")
-      .forEach(el => el.classList.remove("active"));
-  };
-
-  addActiveClass = element => {
-    element.classList.add("active");
+  clickListItem = e => {
+    if (e.keyCode === 13) {
+      e.target.click();
+    } else if (this.state.showInfoWindow) {
+      this.setState({
+        showInfoWindow: false,
+        animation: 0
+      });
+    }
   };
 
   toggleMenu = () => {
     if (this.state.menuOpen) {
-      this.setState({ menuOpen: false })
+      this.setState({ menuOpen: false });
     } else {
-      this.setState({ menuOpen: true })
+      this.setState({ menuOpen: true });
+    }
+    if (this.state.filteredLocations.length === 0) {
+      this.setState({
+        filteredLocations: this.state.locations,
+        searchQuery: ""
+      });
     }
   };
 
@@ -147,10 +146,14 @@ class App extends Component {
           <div className="wrapper">
             {menuOpen && (
               <aside className="side-list">
-                <Search onSearchLocation={this.onSearchLocation} />
+                <Search
+                  onSearchLocation={this.onSearchLocation}
+                  searchQuery={this.state.searchQuery}
+                />
                 <LocationsList
                   filteredLocations={this.state.filteredLocations}
                   onListItemClick={this.onListItemClick}
+                  clickListItem={this.clickListItem}
                 />
               </aside>
             )}
@@ -181,4 +184,3 @@ class App extends Component {
 }
 
 export default App;
-

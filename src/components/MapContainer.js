@@ -34,6 +34,8 @@ class MapContainer extends Component {
       url = `url(${iconImages.sushi})`;
     } else if (category === "japanese") {
       url = `url(${iconImages.japan})`;
+    } else if (category === "vietnamese") {
+      url = `url(${iconImages.vietnamese})`;
     } else {
       url = `url(${iconImages.asian})`;
     }
