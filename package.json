@@ -1,5 +1,6 @@
 {
-  "name": "neighborhood-map-app",
+  "homepage": "http://klaraborowska.github.io/asian-restaurants-map",
+  "name": "asian-restaurants-map",
   "version": "0.1.0",
   "private": false,
   "dependencies": {
@@ -8,10 +9,15 @@
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4"
   },
+  "devDependencies": {
+    "gh-pages": "^1.2.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
