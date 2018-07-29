@@ -155,7 +155,7 @@ class App extends Component {
               </aside>
             )}
 
-            <div className="map">
+            <div className="map" role="application">
               <MapContainer
                 google={window.google}
                 addMarker={this.addMarker}
