@@ -47,10 +47,8 @@ class App extends Component {
   };
 
   onListItemClick = e => {
-    const clickedID = e.currentTarget.dataset.indexNumber
-    const clicked = this.allMarkers.filter(
-      el => el.marker.id === clickedID
-    );
+    const clickedID = e.currentTarget.dataset.indexNumber;
+    const clicked = this.allMarkers.filter(el => el.marker.id === clickedID);
     this.setState({
       clickedMarker: clicked[0].marker,
       showInfoWindow: true,
@@ -70,9 +68,7 @@ class App extends Component {
     const filteredLocations = this.state.locations.filter(
       el =>
         el.venue.name.toLowerCase().includes(query) ||
-        el.venue.categories[0].shortName
-          .toLowerCase()
-          .includes(query)
+        el.venue.categories[0].shortName.toLowerCase().includes(query)
     );
     this.setState({
       searchQuery: query,
@@ -95,7 +91,9 @@ class App extends Component {
   };
 
   toggleMenu = () => {
-      this.setState(this.state.menuOpen ? { menuOpen: false } : { menuOpen: true });
+    this.setState(
+      this.state.menuOpen ? { menuOpen: false } : { menuOpen: true }
+    );
   };
 
   getData = () => {
@@ -117,11 +115,10 @@ class App extends Component {
         console.log(error);
         this.setState({ error: true });
       });
-  }
+  };
+
   componentDidMount() {
-
     this.getData();
-
     // handle error, when google map fails to load
     window.gm_authFailure = () => this.setState({ error: true });
     if (window.google === undefined) {
@@ -130,8 +127,6 @@ class App extends Component {
   }
 
   render() {
-    const noError = !this.state.error;
-
 
     return (
       <div className="App">
@@ -140,10 +135,12 @@ class App extends Component {
           <h1 className="header-title">Asian Restaurants in Warsaw</h1>
         </header>
 
-        {noError ? (
+        {this.state.error ? (
+          <Error />
+        ) : (
           <div className="wrapper">
-           
-              <aside className={this.state.menuOpen ? "sidebar open" : "sidebar closed" }>
+            {this.state.menuOpen && (
+              <aside className="sidebar">
                 <Search
                   onSearchLocation={this.onSearchLocation}
                   searchQuery={this.state.searchQuery}
@@ -154,6 +151,7 @@ class App extends Component {
                   clickListItem={this.clickListItem}
                 />
               </aside>
+            )}
 
             <div className="map" role="application">
               <MapContainer
@@ -166,8 +164,6 @@ class App extends Component {
               />
             </div>
           </div>
-        ) : (
-          <Error />
         )}
         <footer className="footer">
           <p className="footer-copyrights">
