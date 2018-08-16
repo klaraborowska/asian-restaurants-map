@@ -1,8 +1,9 @@
 import React from "react";
+import './ListItem.css';
 
 const ListItem = props => (
   <li
-    className="list-item"
+    className="list__item"
     onClick={props.onListItemClick}
     aria-label={props.name}
     onKeyDown={props.clickListItem}

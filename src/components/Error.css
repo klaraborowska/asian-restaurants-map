@@ -1,0 +1,28 @@
+.alert {
+  height: calc(100vh - 160px);
+  background-color: #fff;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8em;
+  padding: 15px;
+}
+
+.alert__text {
+  padding: 5px 20px;
+}
+
+@media only screen and (max-width: 850px) {
+  .alert {
+    min-height: calc(100vh - 160px);
+    font-size: 1.5em;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .alert {
+    font-size: 1.4em;
+  }
+}

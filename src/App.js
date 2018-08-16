@@ -132,7 +132,7 @@ class App extends Component {
       <div className="App">
         <header className="header">
           <Button toggleMenu={this.toggleMenu} />
-          <h1 className="header-title">Asian Restaurants in Warsaw</h1>
+          <h1 className="header__title">Asian Restaurants in Warsaw</h1>
         </header>
 
         {this.state.error ? (
@@ -166,7 +166,7 @@ class App extends Component {
           </div>
         )}
         <footer className="footer">
-          <p className="footer-copyrights">
+          <p className="footer__copyrights">
             All icons from Flaticon. Restaurants data from Foursquare API
           </p>
         </footer>

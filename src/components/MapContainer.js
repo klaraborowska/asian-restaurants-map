@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker } from "google-maps-react";
+
 import Pin from "../utils/icons/pin.svg";
 import AsianIcon from "../utils/icons/asian.svg";
 import ThaiIcon from "../utils/icons/thai.svg";
@@ -10,6 +11,7 @@ import ChineseIcon from "../utils/icons/chinese.svg";
 import IndianIcon from "../utils/icons/indian.svg";
 import NoodlesIcon from "../utils/icons/noodles.svg";
 
+import './MapContainer.css';
 
 class MapContainer extends Component {
   addCategory = () => {
@@ -25,7 +27,7 @@ class MapContainer extends Component {
   };
 
   addIcon = () => {
-    let category = this.addCategory().toLowerCase();
+    const category = this.addCategory().toLowerCase();
     let src = "";
     switch (category) {
       case "asian":
@@ -56,23 +58,25 @@ class MapContainer extends Component {
   };
 
   render() {
+    const { animation, clickedMarker, showInfoWindow, filteredLocations } = this.props.appState;
+    const { google, onMapClick, onMarkerClick, addMarker, onInfoWindowClose } = this.props;
     const icon = {
       url: Pin,
       scaledSize: new window.google.maps.Size(32, 32)
     };
     return (
       <Map
-        google={this.props.google}
+        google={google}
         initialCenter={{
           lat: 52.2305556,
           lng: 21.0122287
         }}
         zoom={13}
-        onClick={this.props.onMapClick}
+        onClick={onMapClick}
       >
-        {this.props.appState.filteredLocations.map(marker => (
+        {filteredLocations.map(marker => (
           <Marker
-            onClick={this.props.onMarkerClick}
+            onClick={onMarkerClick}
             key={marker.venue.id}
             position={{
               lat: marker.venue.location.lat,
@@ -80,34 +84,26 @@ class MapContainer extends Component {
             }}
             name={marker.venue.name}
             address={marker.venue.location.address}
-            animation={
-              marker.venue.id === this.props.appState.clickedMarker.id
-                ? this.props.appState.animation
-                : null
-            }
-            ref={this.props.addMarker}
+            animation={marker.venue.id === clickedMarker.id ? animation : null}
+            ref={addMarker}
             icon={icon}
             id={marker.venue.id}
           />
         ))}
 
         <InfoWindow
-          onClose={this.props.onInfoWindowClose}
-          marker={this.props.appState.clickedMarker}
-          visible={this.props.appState.showInfoWindow}
-          locations={this.props.appState.filteredLocations}
+          onClose={onInfoWindowClose}
+          marker={clickedMarker}
+          visible={showInfoWindow}
+          locations={filteredLocations}
         >
           <div className="info-window">
-            <h1 className="info-window-title">
-              {this.props.appState.clickedMarker.name}
-            </h1>
-            <img className="info-window-icon" src={this.addIcon()} alt="" />
-            <p className="info-window-details">
-              Address:{" "}
-              {this.props.appState.clickedMarker.address ||
-                "no address available"}
+            <h1 className="info-window__title">{clickedMarker.name}</h1>
+            <img className="info-window__icon icon" src={this.addIcon()} alt="" />
+            <p className="info-window__details">
+              Address: {clickedMarker.address || "no address available"}
             </p>
-            <p className="info-window-details">
+            <p className="info-window__details">
               Category: {this.addCategory()}
             </p>
           </div>

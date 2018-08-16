@@ -1,0 +1,21 @@
+.list__item {
+  padding: 20px 10px 20px 50px;
+  color: #333;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-bottom: 1px solid rgb(219, 219, 219);
+}
+
+.list__item:first-child {
+  border-top: 1px solid rgb(219, 219, 219);
+}
+
+.list__item:last-child {
+  border-bottom: none;
+}
+
+.list__item:hover, .list__item:focus {
+  background-color: #fcaf20;
+  padding-left: 70px;
+}

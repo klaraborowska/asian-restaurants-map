@@ -1,5 +1,6 @@
 import React from "react";
 import MenuIcon from "../utils/icons/menu.svg";
+import './Button.css';
 
 const Button = props => (
   <button type="button" aria-label="Toggle Menu" onClick={props.toggleMenu} className="button">

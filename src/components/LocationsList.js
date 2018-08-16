@@ -2,7 +2,7 @@ import React from "react";
 import ListItem from "./ListItem";
 
 const LocationsList = props => (
-  <ul className="locations-list">
+  <ul className="sidebar__list">
     {props.filteredLocations.map(item => (
       <ListItem
         name={item.venue.name}
