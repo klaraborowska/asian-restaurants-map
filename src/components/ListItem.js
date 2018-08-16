@@ -9,6 +9,7 @@ const ListItem = props => {
       onKeyDown={props.clickListItem}
       role="button"
       tabIndex="0"
+      data-index-number={props.restID}
     >
       {props.name}
     </li>

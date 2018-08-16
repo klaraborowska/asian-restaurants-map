@@ -81,12 +81,13 @@ class MapContainer extends Component {
             name={marker.venue.name}
             address={marker.venue.location.address}
             animation={
-              marker.venue.name === this.props.appState.clickedMarker.name
+              marker.venue.id === this.props.appState.clickedMarker.id
                 ? this.props.appState.animation
                 : null
             }
             ref={this.props.addMarker}
             icon={icon}
+            id={marker.venue.id}
           />
         ))}
 

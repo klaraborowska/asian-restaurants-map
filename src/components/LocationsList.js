@@ -10,6 +10,7 @@ const LocationsList = props => {
           key={item.venue.id}
           onListItemClick={props.onListItemClick}
           clickListItem={props.clickListItem}
+          restID={item.venue.id}
         />
       ))}
     </ul>

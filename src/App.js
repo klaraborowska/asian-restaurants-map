@@ -47,8 +47,9 @@ class App extends Component {
   };
 
   onListItemClick = e => {
+    const clickedID = e.currentTarget.dataset.indexNumber
     const clicked = this.allMarkers.filter(
-      el => el.marker.name === e.target.textContent
+      el => el.marker.id === clickedID
     );
     this.setState({
       clickedMarker: clicked[0].marker,
