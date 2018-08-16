@@ -47,8 +47,19 @@
 
 /* Sidebar */
 
-.sidebar {
+.closed {
+  opacity: 0;
+  flex-basis: 0;
+  transition: all 0.5s 0.2s;
+}
+
+.open {
   flex-basis: 300px;
+  opacity: 1;
+  transition: all 0.2s 0.5s;
+}
+
+.sidebar {
   overflow-y: scroll;
 }
 

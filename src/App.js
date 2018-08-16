@@ -98,7 +98,7 @@ class App extends Component {
       this.setState(this.state.menuOpen ? { menuOpen: false } : { menuOpen: true });
   };
 
-  componentDidMount() {
+  getData = () => {
     const key = "D5SNMMUIS3DTXRQ5FN5G1UBU4XKRSEGVR0KXMS5KRB1YZGSY";
     const secret = "NAJXBKSQ4VEKRWJPDEGVPW1QMASLTUEGXWYDBOVJG2ODFF5J";
     fetch(
@@ -117,6 +117,10 @@ class App extends Component {
         console.log(error);
         this.setState({ error: true });
       });
+  }
+  componentDidMount() {
+
+    this.getData();
 
     // handle error, when google map fails to load
     window.gm_authFailure = () => this.setState({ error: true });
@@ -127,7 +131,7 @@ class App extends Component {
 
   render() {
     const noError = !this.state.error;
-    const menuOpen = this.state.menuOpen;
+
 
     return (
       <div className="App">
@@ -138,8 +142,8 @@ class App extends Component {
 
         {noError ? (
           <div className="wrapper">
-            {menuOpen && (
-              <aside className="sidebar">
+           
+              <aside className={this.state.menuOpen ? "sidebar open" : "sidebar closed" }>
                 <Search
                   onSearchLocation={this.onSearchLocation}
                   searchQuery={this.state.searchQuery}
@@ -150,7 +154,6 @@ class App extends Component {
                   clickListItem={this.clickListItem}
                 />
               </aside>
-            )}
 
             <div className="map" role="application">
               <MapContainer
