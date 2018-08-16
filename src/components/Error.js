@@ -1,9 +1,10 @@
 import React from "react";
+import WarningIcon from "../utils/icons/warning.svg"
 
 const Error = () => {
   return (
     <div className="api-failure">
-      <div className="alert-icon" />
+      <img className="alert-icon" src={WarningIcon} alt="" />
       <p className="alert-text">Sorry, the data could not be loaded.</p>
       <p className="alert-text">See the JavaScript console for technical details.</p>
     </div>

@@ -27,13 +27,15 @@
   position: absolute;
   top: 25px;
   left: 30px;
-  background-image: url('./utils/icons/menu.png');
-  height: 32px;
-  width: 32px;
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
+.menu-icon {
+  height: 32px;
+  width: 32px;
+}
+
 
 /***** MAIN *****/
 
@@ -158,10 +160,6 @@
   font-size: 1.8em;
 }
 
-.alert-icon {
-  background-image: url('./utils/icons/warning.png');
-  width: 64px;
-}
 
 .alert-text {
   padding: 5px 20px;
