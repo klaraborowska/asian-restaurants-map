@@ -1,9 +1,15 @@
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker } from "google-maps-react";
-import * as icons from "../utils/icons/Icons";
 import Pin from "../utils/icons/pin.svg";
+import AsianIcon from "../utils/icons/asian.svg";
+import ThaiIcon from "../utils/icons/thai.svg";
+import VietnameseIcon from "../utils/icons/vietnamese.svg";
+import JapaneseIcon from "../utils/icons/japanese.svg";
+import SushiIcon from "../utils/icons/sushi.svg";
+import ChineseIcon from "../utils/icons/chinese.svg";
+import IndianIcon from "../utils/icons/indian.svg";
+import NoodlesIcon from "../utils/icons/noodles.svg";
 
-const iconImages = icons.icons[0];
 
 class MapContainer extends Component {
   addCategory = () => {
@@ -20,25 +26,33 @@ class MapContainer extends Component {
 
   addIcon = () => {
     let category = this.addCategory().toLowerCase();
-    let url = "";
-    if (category === "thai") {
-      url = `url(${iconImages.thai})`;
-    } else if (category === "indian") {
-      url = `url(${iconImages.indian})`;
-    } else if (category === "chinese") {
-      url = `url(${iconImages.chinese})`;
-    } else if (category === "sushi") {
-      url = `url(${iconImages.sushi})`;
-    } else if (category === "japanese") {
-      url = `url(${iconImages.japan})`;
-    } else if (category === "vietnamese") {
-      url = `url(${iconImages.vietnamese})`;
-    } else if (category === "asian") {
-      url = `url(${iconImages.asian})`;
-    } else {
-      url = `url(${iconImages.other})`;
+    let src = "";
+    switch (category) {
+      case "asian":
+        src = AsianIcon;
+        break;
+      case "thai":
+        src = ThaiIcon;
+        break;
+      case "vietnamese":
+        src = VietnameseIcon;
+        break;
+      case "japanese":
+        src = JapaneseIcon;
+        break;
+      case "sushi":
+        src = SushiIcon;
+        break;
+      case "chinese":
+        src = ChineseIcon;
+        break;
+      case "indian":
+        src = IndianIcon;
+        break;
+      default:
+        src = NoodlesIcon;
     }
-    return url;
+    return src;
   };
 
   render() {
@@ -86,15 +100,11 @@ class MapContainer extends Component {
             <h1 className="info-window-title">
               {this.props.appState.clickedMarker.name}
             </h1>
-            <p
-              className="info-window-icon"
-              style={{
-                backgroundImage: `${this.addIcon()}`
-              }}
-            />
+            <img className="info-window-icon" src={this.addIcon()} alt="" />
             <p className="info-window-details">
               Address:{" "}
-              {this.props.appState.clickedMarker.address || "no address available"}
+              {this.props.appState.clickedMarker.address ||
+                "no address available"}
             </p>
             <p className="info-window-details">
               Category: {this.addCategory()}

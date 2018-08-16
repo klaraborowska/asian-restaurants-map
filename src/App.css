@@ -114,12 +114,11 @@
 .info-window {
   text-align: center;
   font-family: 'Rajdhani', sans-serif;
-  padding-left: 10px;
+  padding-left: 15px;
 }
 
 .info-window-title {
   font-size: 1.5em;
-  padding-left: 10px;
 }
 
 .info-window-details {
@@ -129,12 +128,8 @@
 }
 
 .info-window-icon, .alert-icon {
-  background-image: url('./utils/icons/dish.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 20px 10px;
+  margin: 15px;
   height: 64px;
-  width: 90%;
 }
 
 /***** FOOTER *****/
