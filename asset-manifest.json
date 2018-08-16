@@ -1,6 +1,17 @@
 {
-  "main.css": "static/css/main.cf39d2c1.css",
-  "main.css.map": "static/css/main.cf39d2c1.css.map",
-  "main.js": "static/js/main.5308a05f.js",
-  "main.js.map": "static/js/main.5308a05f.js.map"
+  "main.css": "static/css/main.4c2d85d3.css",
+  "main.css.map": "static/css/main.4c2d85d3.css.map",
+  "main.js": "static/js/main.dfa11c6d.js",
+  "main.js.map": "static/js/main.dfa11c6d.js.map",
+  "static\\media\\asian.svg": "static/media/asian.cf86cb93.svg",
+  "static\\media\\chinese.svg": "static/media/chinese.a9cd0a1e.svg",
+  "static\\media\\indian.svg": "static/media/indian.541b1e73.svg",
+  "static\\media\\japanese.svg": "static/media/japanese.e1d702ec.svg",
+  "static\\media\\menu.svg": "static/media/menu.922bbf14.svg",
+  "static\\media\\noodles.svg": "static/media/noodles.849142a7.svg",
+  "static\\media\\pin.svg": "static/media/pin.d881601e.svg",
+  "static\\media\\sushi.svg": "static/media/sushi.096d5fe9.svg",
+  "static\\media\\thai.svg": "static/media/thai.bb677c03.svg",
+  "static\\media\\vietnamese.svg": "static/media/vietnamese.36614d0d.svg",
+  "static\\media\\warning.svg": "static/media/warning.06ecf059.svg"
 }
