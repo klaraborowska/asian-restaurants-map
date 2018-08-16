@@ -58,7 +58,7 @@
 .search-label {
   position: absolute;
   top: 35px;
-  left: 55px;
+  left: 50px;
   z-index: 1;
   transition: all 0.3s;
   font-size: 0.9em;
@@ -83,7 +83,7 @@
 }
 
 .list-item {
-  padding: 20px 20px 20px 50px;
+  padding: 20px 10px 20px 50px;
   color: #333;
   font-size: 1em;
   cursor: pointer;
@@ -114,6 +114,7 @@
 .info-window {
   text-align: center;
   font-family: 'Rajdhani', sans-serif;
+  padding-left: 10px;
 }
 
 .info-window-title {
@@ -131,7 +132,7 @@
   background-image: url('./utils/icons/dish.png');
   background-position: center;
   background-repeat: no-repeat;
-  margin: 10px;
+  margin: 20px 10px;
   height: 64px;
   width: 90%;
 }

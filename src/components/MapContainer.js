@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker } from "google-maps-react";
 import * as icons from "../utils/icons/Icons";
+import Pin from "../utils/icons/pin.svg";
 
 const iconImages = icons.icons[0];
 
@@ -42,7 +43,8 @@ class MapContainer extends Component {
 
   render() {
     const icon = {
-      url: iconImages.marker
+      url: Pin,
+      scaledSize: new window.google.maps.Size(32, 32)
     };
     return (
       <Map
@@ -92,9 +94,7 @@ class MapContainer extends Component {
             />
             <p className="info-window-details">
               Address:{" "}
-              {this.props.appState.clickedMarker.address
-                ? this.props.appState.clickedMarker.address
-                : "no address available"}
+              {this.props.appState.clickedMarker.address || "no address available"}
             </p>
             <p className="info-window-details">
               Category: {this.addCategory()}

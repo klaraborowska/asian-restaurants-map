@@ -65,13 +65,13 @@ class App extends Component {
   };
 
   onSearchLocation = e => {
-    const query = e.target.value;
+    const query = e.target.value.toLowerCase();
     const filteredLocations = this.state.locations.filter(
       el =>
-        el.venue.name.toLowerCase().includes(query.toLowerCase()) ||
+        el.venue.name.toLowerCase().includes(query) ||
         el.venue.categories[0].shortName
           .toLowerCase()
-          .includes(query.toLowerCase())
+          .includes(query)
     );
     this.setState({
       searchQuery: query,
@@ -94,11 +94,7 @@ class App extends Component {
   };
 
   toggleMenu = () => {
-    if (this.state.menuOpen) {
-      this.setState({ menuOpen: false });
-    } else {
-      this.setState({ menuOpen: true });
-    }
+      this.setState(this.state.menuOpen ? { menuOpen: false } : { menuOpen: true });
   };
 
   componentDidMount() {
